@@ -1,0 +1,34 @@
+{
+  "name": "auto-update-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "publish": "build -p always"
+  },
+  "author": "Stefan Borsutzky",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^4.0.5",
+    "electron-builder": "^20.38.5"
+  },
+  "dependencies": {
+    "electron-updater": "^4.0.6"
+  },
+  "build": {
+    "appId": "com.example.app",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Borsi92",
+        "repo": "auto-update-app-public"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  }
+}

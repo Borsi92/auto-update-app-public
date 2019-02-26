@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset = "UTF-8">
+      <title>Auto Update Test</title>
+      <link rel="stylesheet" href="style.css">
+   </head>
+   
+   <body>
+      <table>
+          <tr>
+              <th>Name</th>
+              <th>Jahr</th>
+              <th>Art</th>
+          </tr>
+          <tr>
+              <td>AKO</td>
+              <td>2016</td>
+              <td>JVA</td>
+          </tr>
+          <tr>
+            <td>REMRAB</td>
+            <td>2016</td>
+            <td>28q</td>
+          </tr>
+      </table>
+
+      <br><br>
+
+        Current version: <span id="version">vX.Y.Z</span>
+
+        <br><br>
+
+        <div id="messages"></div>
+
+      <script>
+            const {ipcRenderer} = require('electron');
+
+            // Aktuelle Version anzeigen
+            ipcRenderer.send('version-nummer')
+
+            ipcRenderer.on('version-nummer', (event, data) => {
+                console.log("Versionsnummer erhalten: " + data)
+
+                document.getElementById('version').innerText = data;
+            })
+
+            // Listen for messages
+            ipcRenderer.on('message', function(event, text) {
+                var container = document.getElementById('messages');
+                var message = document.createElement('div');
+                message.innerHTML = text;
+                container.appendChild(message);
+            })
+      </script>
+
+   </body>
+</html>
