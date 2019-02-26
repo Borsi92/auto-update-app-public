@@ -60,3 +60,7 @@ autoUpdater.on('update-downloaded', (info) => {
 
 
 app.on('ready', createWindow)
+
+app.on('ready', function()  {
+    autoUpdater.checkForUpdatesAndNotify();
+});
