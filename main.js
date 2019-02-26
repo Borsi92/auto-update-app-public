@@ -1,5 +1,11 @@
 const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const { autoUpdater } = require("electron-updater")
+const log = require('electron-log')
+
+// Logging Einstellungen
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
 
 let mainWin
 
@@ -17,13 +23,13 @@ function createWindow() {
 }
 
 function sendStatusToWindow(text) {
-    console.log(text);
+    log.info(text);
     mainWin.webContents.send('message', text);
   }
 
 // Versionsnummer Anfrage
 ipcMain.on('version-nummer', (event, data) => {
-    console.log("Versionsnummer angefragt.")
+    sendStatusToWindow('Versionsnummer angefragt.');
 
     event.sender.send('version-nummer', app.getVersion())
 })
