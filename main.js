@@ -64,3 +64,7 @@ app.on('ready', createWindow)
 app.on('ready', function()  {
     autoUpdater.checkForUpdatesAndNotify();
 });
+
+app.on('window-all-closed', () => {
+    app.quit();
+});
